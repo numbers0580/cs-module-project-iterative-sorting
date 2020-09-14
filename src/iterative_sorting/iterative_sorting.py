@@ -52,25 +52,32 @@ What is the time and space complexity of the counting sort algorithm?
 '''
 def counting_sort(arr, maximum=None):
     # Your code here
-    temp = []
-    count = []
+    temp = [] # This is for the sorted array that will replace arr at the end
+    count = [] # This is for all discrete values up to the maximum found
 
     if len(arr) > 0:
-        maximum = arr[0]
+        # No else-statement needed. If there is an else, the empty arr will return itself by default
+
+        maximum = arr[0] # Seed value
+
         for i in arr:
             if i > maximum:
                 maximum = i
 
+            # While I'm here...
             if i < 0:
                 return "Error, negative numbers not allowed in Count Sort"
 
         # highest value in non-null array is found, and negative numbers have been reported
 
+        # Initialize ALL discrete values in count to 0
         count = [0 for j in range(maximum + 1)]
 
+        # For each value found in arr, increment that count position by 1 for each occurence
         for j in arr:
             count[j] += 1
 
+        # Find all values that occur at least once and store them in temp
         for j in range(maximum + 1):
             if count[j] > 0:
                 for k in range(count[j]):
